@@ -3,14 +3,17 @@ import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 
 function App() {
-  const [newTodo, setNewTodo] = React.useState('');
+  const [todoList, setTodoList] = React.useState([]);
+
+  function addTodo(newTodo) {
+    setTodoList([...todoList, newTodo])
+  }
   return (
     <div style={{ textAlign: 'left' }}>
       <header>
-        <h1>ToDo List</h1> 
-        <TodoList />  
-        <AddTodoForm onAddTodo={setNewTodo} />       
-        <p>{newTodo}</p>  
+        <h1>ToDo List</h1>
+        <TodoList todoList={todoList} />
+        <AddTodoForm onAddTodo={addTodo} />
       </header>
     </div>
   );
