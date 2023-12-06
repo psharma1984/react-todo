@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 
-
-
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = () => {
       return new Promise((resolve, reject) => {
@@ -15,6 +14,7 @@ function App() {
         }, 2000)
       })
     }
+
     fetchData()
       .then((result) => {
         setTodoList(result.data.todoList)
