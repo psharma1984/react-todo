@@ -11,7 +11,7 @@ function App() {
     const fetchData = () => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve({ data: { todoList: JSON.parse(localStorage.getItem('savedTodoList')) } })
+          resolve({ data: { todoList: JSON.parse(localStorage.getItem('savedTodoList')) || [] } })
         }, 2000)
       })
     }
