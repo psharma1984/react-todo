@@ -1,28 +1,20 @@
 import React, { useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import { fetchTodosFromAPI, addTodoToAPI } from './apiFunctions'
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = () => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({ data: { todoList: JSON.parse(localStorage.getItem('savedTodoList')) || [] } })
-        }, 2000)
-      })
+    async function fetchData() {
+      const todos = await fetchTodosFromAPI();
+      console.log(todos)
+      setTodoList([...todos]);
+      setIsLoading(false);
     }
-
-    fetchData()
-      .then((result) => {
-        setTodoList(result.data.todoList)
-        setIsLoading(false)
-      })
-      .catch((err) => {
-        console.error('Error fetching data:', err);
-      })
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -31,11 +23,16 @@ function App() {
     }
   }, [todoList, isLoading]);
 
-  function addTodo(newTodo) {
-    setTodoList([...todoList, newTodo])
+  async function addTodo(newTodo) {
+    const addedTodo = await addTodoToAPI(newTodo);
+    if (addedTodo) {
+      setTodoList([...todoList, addedTodo])
+    }
+
+    //setTodoList([...todoList, newTodo])
   }
 
-  function removeTodo(id) {
+  function removeTodoFromList(id) {
     const updatedTodoList = todoList.filter(todo => todo.id !== id)
     setTodoList(updatedTodoList);
   }
@@ -48,7 +45,7 @@ function App() {
           <p>Loading...</p>
         ) : (
           <>
-            <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+            <TodoList todoList={todoList} onRemoveTodo={removeTodoFromList} />
           </>
         )}
         <AddTodoForm onAddTodo={addTodo} />
