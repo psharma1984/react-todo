@@ -29,7 +29,7 @@ async function fetchTodosFromAPI() {
 }
 
 
-async function addTodoToAPI(newTodo) {
+async function postNewTodoToAPI(newTodo) {
   try {
     const options = {
       method: 'POST',
@@ -46,12 +46,12 @@ async function addTodoToAPI(newTodo) {
       throw new Error(`Error:${response.status}`)
     }
 
-    const addTodo = await response.json()
-    return { id: addTodo.id, title: addTodo.fields.title };
+    const newData = await response.json()
+    return { id: newData.id, title: newData.fields.title };
   } catch (err) {
     console.log(err.message)
     return null;
   }
 }
 
-export { generateAPIUrl, fetchTodosFromAPI, addTodoToAPI };
+export { generateAPIUrl, fetchTodosFromAPI, postNewTodoToAPI };

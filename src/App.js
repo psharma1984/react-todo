@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
-import { fetchTodosFromAPI, addTodoToAPI } from './apiFunctions'
+import { fetchTodosFromAPI, postNewTodoToAPI } from './apiFunctions'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -23,13 +24,11 @@ function App() {
     }
   }, [todoList, isLoading]);
 
-  async function addTodo(newTodo) {
-    const addedTodo = await addTodoToAPI(newTodo);
+  async function postTodo(newTodo) {
+    const addedTodo = await postNewTodoToAPI(newTodo);
     if (addedTodo) {
       setTodoList([...todoList, addedTodo])
     }
-
-    //setTodoList([...todoList, newTodo])
   }
 
   function removeTodoFromList(id) {
@@ -38,20 +37,27 @@ function App() {
   }
 
   return (
-    <>
-      <header>
-        <h1>ToDo List</h1>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            <TodoList todoList={todoList} onRemoveTodo={removeTodoFromList} />
-          </>
-        )}
-        <AddTodoForm onAddTodo={addTodo} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          <header>
+            <h1>ToDo List</h1>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <TodoList todoList={todoList} onRemoveTodo={removeTodoFromList} />
+              </>
+            )}
+            <AddTodoForm onAddTodo={postTodo} />
 
-      </header>
-    </>
+          </header>
+        } />
+        <Route path="/new" element={
+          <h1>New Todo List</h1>
+        } />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
