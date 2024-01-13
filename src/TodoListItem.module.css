@@ -1,0 +1,72 @@
+.ListItem {
+  color: darkcyan;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.LeftContent {
+  display: flex;
+  justify-content: flex-start; /* Align to the far left */
+  align-items: center;
+}
+
+h1 {
+  color: brown;
+  margin-left: 25px;
+  font-weight: 100;
+  font-size: large;
+  text-align: center;
+}
+
+body {
+  color: brown;
+  background-color: #f0f0f0;
+  font-family: "Lemon", serif;
+}
+
+.strikeThrough {
+  text-decoration: line-through;
+  color: rosybrown;
+}
+
+.navLink {
+  color: #fff;
+  text-decoration: wavy;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.activeNavLink {
+  background-color: coral;
+  color: blue;
+}
+
+.addButton {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.addButton:hover {
+  background-color: darkgreen;
+}
+
+label {
+  clear: left;
+  text-align: right;
+  padding-right: 10px;
+}
+
+input,
+label {
+  float: left;
+}
+
+.deleteIcon {
+  color: grey;
+  cursor: pointer;
+}

@@ -17,7 +17,7 @@ import TodoListItem from './TodoListItem';
 // ]
 function TodoList({ todoList, onRemoveTodo }) {
   return (
-    <ul>
+    <ul style={{ listStyle: "none" }}>
       {todoList.map((todo) => (
         <TodoListItem key={todo.id} todo={todo} onRemoveTodo={onRemoveTodo} />
       ))}
