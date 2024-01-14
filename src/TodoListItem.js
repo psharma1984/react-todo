@@ -7,12 +7,10 @@ function TodoListItem({ todo, onRemoveTodo }) {
     function handleRemove() {
         onRemoveTodo(todo.id)
     }
-    function handleStrike() {
-        setIsChecked(!isChecked);
-    }
+
     return (<li className={style.ListItem}>
         <div className={style.LeftContent}>
-            <input type="checkbox" onClick={handleStrike} />
+            <input type="checkbox" onClick={() => setIsChecked(!isChecked)} />
             <span className={isChecked ? style.strikeThrough : ''}>
                 {todo.title}
             </span>
