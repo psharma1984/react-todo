@@ -42,20 +42,25 @@ function App() {
       <Routes>
         <Route path="/" element={
           <header>
-            <h1>ToDo List</h1>
+            <h1>ToDoList</h1>
+            <br />
             {isLoading ? (
               <p>Loading...</p>
             ) : (
               <>
                 <TodoList todoList={todoList} onRemoveTodo={removeTodoFromList} />
+                <br />
               </>
+
             )}
             <AddTodoForm onAddTodo={postTodo} />
 
           </header>
         } />
         <Route path="/new" element={
-          <h1>New Todo List</h1>
+          <div style={{ textAlign: 'center' }}>
+            <h1>New Todo List</h1>
+          </div>
         } />
       </Routes>
     </BrowserRouter>

@@ -1,22 +1,14 @@
 .ListItem {
   color: darkcyan;
-  padding: 5px;
   display: flex;
-  justify-content: space-between;
-}
-
-.LeftContent {
-  display: flex;
-  justify-content: flex-start; /* Align to the far left */
-  align-items: center;
+  margin-bottom: 10px;
 }
 
 h1 {
   color: brown;
-  margin-left: 25px;
   font-weight: 100;
   font-size: large;
-  text-align: center;
+  margin: 0;
 }
 
 body {
@@ -28,6 +20,15 @@ body {
 .strikeThrough {
   text-decoration: line-through;
   color: rosybrown;
+  flex: 2;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.noStrike {
+  flex: 2;
+  text-align: left;
+  margin-left: 10px;
 }
 
 .navLink {
@@ -55,18 +56,12 @@ body {
   background-color: darkgreen;
 }
 
-label {
-  clear: left;
-  text-align: right;
-  padding-right: 10px;
-}
-
-input,
-label {
-  float: left;
+input {
+  margin: 0;
 }
 
 .deleteIcon {
   color: grey;
   cursor: pointer;
+  flex: 0;
 }

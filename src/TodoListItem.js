@@ -9,12 +9,10 @@ function TodoListItem({ todo, onRemoveTodo }) {
     }
 
     return (<li className={style.ListItem}>
-        <div className={style.LeftContent}>
-            <input type="checkbox" onClick={() => setIsChecked(!isChecked)} />
-            <span className={isChecked ? style.strikeThrough : ''}>
-                {todo.title}
-            </span>
-        </div>
+        <input type="checkbox" style={{ flex: 0 }} onClick={() => setIsChecked(!isChecked)} />
+        <span className={isChecked ? style.strikeThrough : style.noStrike}>
+            {todo.title}
+        </span>
         <button className={style.deleteIcon} type='button' onClick={handleRemove}>
             <FaTrashAlt />
         </button>

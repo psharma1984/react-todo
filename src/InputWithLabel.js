@@ -11,7 +11,6 @@ function InputWithLabel(props) {
 
     return (
         <>
-            <label htmlFor='todoTitle'>{props.children}</label>
             <input ref={inputRef} id='todoTitle' value={props.value} type='text' name='title' onChange={props.onChange} />
         </>
     );

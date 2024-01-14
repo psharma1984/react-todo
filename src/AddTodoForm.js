@@ -22,7 +22,7 @@ function AddTodoForm({ onAddTodo }) {
         setTodoTitle('');
     };
     return (
-        <form onSubmit={handleAddTodo} style={{ marginLeft: "50px" }}>
+        <form onSubmit={handleAddTodo} style={{ display: "flex", margin: 0, padding: 0 }}>
             <InputWithLabel value={todoTitle} onChange={handleTitleChange}>
             </InputWithLabel>
             <button className={style.addButton} type='submit'>
