@@ -25,6 +25,6 @@ This is a simple React application for managing your todo list.
 4. Start the development server
    ```
    npm start
-5. Open your browser and go to [Click here](http://localhost:3000) Use the app to manage your todo list.
+5. Open your browser and go to [http://localhost:3000](http://localhost:3000) Use the app to manage your todo list.
 
 
