@@ -18,9 +18,13 @@ This is a simple React application for managing your todo list.
    ```
    cd react-todo
 
-4. Install dependencies
+3. Install dependencies
+   ```
    npm install
 
-5. Start the development server
+4. Start the development server
+   ```
    npm start
+5. Open your browser and go to [Click here](http://localhost:3000) Use the app to manage your todo list.
+
 
