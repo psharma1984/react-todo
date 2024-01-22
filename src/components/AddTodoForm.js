@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import InputWithLabel from './InputWithLabel';
 import { MdAdd } from "react-icons/md";
 import style from './TodoListItem.module.css';
@@ -30,6 +31,10 @@ function AddTodoForm({ onAddTodo }) {
             </button>
         </form>
     );
+}
+
+AddTodoForm.propTypes = {
+    onAddTodo: PropTypes.func,
 }
 
 export default AddTodoForm;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FaTrashAlt } from 'react-icons/fa';
 import style from './TodoListItem.module.css';
 
@@ -17,6 +18,10 @@ function TodoListItem({ todo, onRemoveTodo }) {
             <FaTrashAlt />
         </button>
     </li>);
+}
+
+TodoListItem.propTypes = {
+    onRemoveTodo: PropTypes.func,
 }
 
 export default TodoListItem;

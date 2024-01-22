@@ -1,62 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import TodoList from './TodoList';
-import AddTodoForm from './AddTodoForm';
-import { fetchTodosFromAPI, postNewTodoToAPI } from './apiFunctions'
+import React from 'react';
+import TodoContainer from './components/TodoContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './TodoListItem.module.css';
+import './components/TodoListItem.module.css';
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      const todos = await fetchTodosFromAPI();
-      console.log(todos)
-      setTodoList([...todos]);
-      setIsLoading(false);
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem('savedTodoList', JSON.stringify(todoList));
-    }
-  }, [todoList, isLoading]);
-
-  async function postTodo(newTodo) {
-    const addedTodo = await postNewTodoToAPI(newTodo);
-    if (addedTodo) {
-      setTodoList([...todoList, addedTodo])
-    }
-  }
-
-  function removeTodoFromList(id) {
-    const updatedTodoList = todoList.filter(todo => todo.id !== id)
-    setTodoList(updatedTodoList);
-  }
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={
-          <header>
-            <h1>ToDoList</h1>
-            <br />
-            {isLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                <TodoList todoList={todoList} onRemoveTodo={removeTodoFromList} />
-                <br />
-              </>
-
-            )}
-            <AddTodoForm onAddTodo={postTodo} />
-
-          </header>
-        } />
+        <Route path="/" element={<TodoContainer />} />
         <Route path="/new" element={
           <div style={{ textAlign: 'center' }}>
             <h1>New Todo List</h1>
