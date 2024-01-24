@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import PropTypes from 'prop-types';
 import AddTodoForm from './AddTodoForm';
-import { fetchTodosFromAPI, postNewTodoToAPI } from '../apiFunctions'
+import { fetchTodosFromAPI, postNewTodoToAPI, deleteTodoFromAPI, updateTodoFromAPI } from '../apiFunctions'
 import './TodoListItem.module.css';
 
 const TodoContainer = () => {
@@ -12,7 +12,6 @@ const TodoContainer = () => {
     useEffect(() => {
         async function fetchData() {
             const todos = await fetchTodosFromAPI();
-            console.log(todos)
             setTodoList([...todos]);
             setIsLoading(false);
         }
@@ -33,8 +32,20 @@ const TodoContainer = () => {
         }
     }
 
-    function removeTodoFromList(id) {
-        const updatedTodoList = todoList.filter(todo => todo.id !== id)
+    async function removeTodoFromList(id) {
+        const removedTodo = await deleteTodoFromAPI(id);
+        //console.log(removedTodo)
+        if (removedTodo) {
+            const newTodoList = todoList.filter(todo => todo.id !== id);
+            setTodoList(newTodoList);
+        }
+    }
+
+    async function updateTodoInList(id, newCompleted) {
+        await updateTodoFromAPI(id, newCompleted);
+        const updatedTodoList = todoList.map((todo) =>
+            todo.id === id ? { ...todo, completed: newCompleted } : todo
+        );
         setTodoList(updatedTodoList);
     }
 
@@ -47,7 +58,7 @@ const TodoContainer = () => {
                     <p>Loading...</p>
                 ) : (
                     <>
-                        <TodoList todoList={todoList} onRemoveTodo={removeTodoFromList} />
+                        <TodoList todoList={todoList} onRemoveTodo={removeTodoFromList} onUpdateTodo={updateTodoInList} />
                         <br />
                     </>
 

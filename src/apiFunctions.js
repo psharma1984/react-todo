@@ -15,7 +15,7 @@ async function fetchTodosFromAPI() {
       throw new Error(message);
     }
     const data = await response.json()
-    //console.log(data)
+
     const todos = data.records.map((todo) => ({
       id: todo.id,
       title: todo.fields.title
@@ -54,4 +54,53 @@ async function postNewTodoToAPI(newTodo) {
   }
 }
 
-export { generateAPIUrl, fetchTodosFromAPI, postNewTodoToAPI };
+const deleteTodoFromAPI = async (id) => {
+  try {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      }
+    };
+    const url = generateAPIUrl(process.env.REACT_APP_AIRTABLE_BASE_ID, process.env.REACT_APP_TABLE_NAME);
+    const response = await fetch(`${url}/${id}`, options)
+
+    if (!response.ok) {
+      throw new Error(`Error:${response.status}`)
+    }
+    else {
+      return response.status;
+    }
+  } catch (err) {
+    console.log(err.message)
+    return null;
+  }
+}
+
+const updateTodoFromAPI = async (id, newCompleted) => {
+  try {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+      body: JSON.stringify({ fields: { completed: newCompleted } }),
+    }
+    const url = generateAPIUrl(process.env.REACT_APP_AIRTABLE_BASE_ID, process.env.REACT_APP_TABLE_NAME);
+    const response = await fetch(`${url}/${id}`, options)
+
+    if (!response.ok) {
+      throw new Error(`Error:${response.status}`)
+    }
+    else {
+      return response.status;
+    }
+  } catch (err) {
+    console.log(err.message)
+    return null;
+  }
+}
+
+export { fetchTodosFromAPI, postNewTodoToAPI, deleteTodoFromAPI, updateTodoFromAPI };

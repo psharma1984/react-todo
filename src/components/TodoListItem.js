@@ -1,27 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaTrashAlt } from 'react-icons/fa';
 import style from './TodoListItem.module.css';
 
-function TodoListItem({ todo, onRemoveTodo }) {
-    const [isChecked, setIsChecked] = React.useState(false);
+function TodoListItem({ todo, onRemoveTodo, onUpdateTodo }) {
+
+    const { title, id, completed } = todo;
+
+    console.log(todo)
+
+    const [isCompleted, setIsCompleted] = useState(completed);
+
+
     function handleRemove() {
-        onRemoveTodo(todo.id)
+        onRemoveTodo(id);
     }
 
-    return (<li className={style.ListItem}>
-        <input type="checkbox" style={{ flex: 0 }} onClick={() => setIsChecked(!isChecked)} />
-        <span className={isChecked ? style.strikeThrough : style.noStrike}>
-            {todo.title}
-        </span>
-        <button className={style.deleteIcon} type='button' onClick={handleRemove}>
-            <FaTrashAlt />
-        </button>
-    </li>);
+    function handleUpdate() {
+        setIsCompleted(!isCompleted);
+        onUpdateTodo(id, !isCompleted);
+    }
+
+    return (
+        <li className={style.ListItem} >
+            <input type="checkbox" style={{ flex: 0 }} checked={isCompleted} onChange={handleUpdate} />
+
+            <span className={isCompleted ? style.strikeThrough : style.noStrike}>
+                {todo.title}
+            </span>
+
+            <button className={style.deleteIcon} type='button' onClick={handleRemove}>
+                <FaTrashAlt />
+            </button>
+        </li>
+    );
 }
 
 TodoListItem.propTypes = {
     onRemoveTodo: PropTypes.func,
-}
+};
 
 export default TodoListItem;
