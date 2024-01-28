@@ -1,25 +1,57 @@
 .ListItem {
-  color: darkcyan;
   display: flex;
   margin-bottom: 10px;
 }
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.box {
+  width: 50%;
+  padding: 60px;
+}
+
+/* styling to create a box-like appearance for each list item */
+.SideDiv {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+.SideDiv div {
+  box-sizing: border-box;
+  width: calc(50% - 20px); /* Two boxes in a row with margin in between */
+  height: 60px;
+  margin: 10px; /* margin between the boxes */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: darkgray;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SideDiv div:hover {
+  background-color: gray;
+}
 
 h1 {
-  color: brown;
-  font-weight: 100;
   font-size: large;
-  margin: 0;
+  padding-top: 20px;
+  font-weight: bolder;
+  text-decoration: underline;
 }
 
 body {
-  color: brown;
-  background-color: #f0f0f0;
-  font-family: "Lemon", serif;
+  color: white;
+  background-color: black;
+  font-family: "Roboto", sans-serif;
 }
 
 .strikeThrough {
   text-decoration: line-through;
-  color: rosybrown;
+  color: grey;
   flex: 2;
   text-align: left;
   margin-left: 10px;

@@ -5,10 +5,7 @@ import style from './TodoListItem.module.css';
 
 function TodoListItem({ todo, onRemoveTodo, onUpdateTodo }) {
 
-    const { title, id, completed } = todo;
-
-    console.log(todo)
-
+    const { id, completed } = todo;
     const [isCompleted, setIsCompleted] = useState(completed);
 
 
@@ -26,7 +23,7 @@ function TodoListItem({ todo, onRemoveTodo, onUpdateTodo }) {
             <input type="checkbox" style={{ flex: 0 }} checked={isCompleted} onChange={handleUpdate} />
 
             <span className={isCompleted ? style.strikeThrough : style.noStrike}>
-                {todo.title}
+                {todo.title.toUpperCase()}
             </span>
 
             <button className={style.deleteIcon} type='button' onClick={handleRemove}>
