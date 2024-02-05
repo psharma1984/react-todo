@@ -15,13 +15,15 @@
 /* styling to create a box-like appearance for each list item */
 .SideDiv {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  align-items: center;
   margin: 20px;
 }
 .SideDiv div {
   box-sizing: border-box;
-  width: calc(50% - 20px); /* Two boxes in a row with margin in between */
-  height: 60px;
+  height: 100px;
+  width: 200px;
   margin: 10px; /* margin between the boxes */
   padding: 20px;
   border: 1px solid #ccc;
