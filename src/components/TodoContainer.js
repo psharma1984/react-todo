@@ -3,21 +3,24 @@ import TodoList from './TodoList';
 import PropTypes from 'prop-types';
 import AddTodoForm from './AddTodoForm';
 import { fetchTodosFromAPI, postNewTodoToAPI, deleteTodoFromAPI, updateTodoFromAPI } from '../apiFunctions'
-import './TodoListItem.module.css';
+import style from './TodoListItem.module.css';
 
 const TodoContainer = ({ selectedList }) => {
     const [todoList, setTodoList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
+
+
 
     useEffect(() => {
         async function fetchData() {
-            const todos = await fetchTodosFromAPI(selectedList);
+            const todos = await fetchTodosFromAPI(selectedList, sortOrder);
             setTodoList([...todos]);
             //console.log(todos)
             setIsLoading(false);
         }
         fetchData();
-    }, [selectedList]);
+    }, [selectedList, sortOrder]);
 
 
     useEffect(() => {
@@ -26,10 +29,15 @@ const TodoContainer = ({ selectedList }) => {
         }
     }, [todoList, isLoading]);
 
+    const handleSortChange = (sortOrder) => {
+        const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+        setSortOrder(newSortOrder);
+    }
     async function postTodo(newTodo) {
         const addedTodo = await postNewTodoToAPI(newTodo, selectedList);
         if (addedTodo) {
-            setTodoList([...todoList, addedTodo])
+            const sortedTodos = await fetchTodosFromAPI(selectedList, sortOrder);
+            setTodoList([...sortedTodos]);
         }
     }
 
@@ -56,6 +64,11 @@ const TodoContainer = ({ selectedList }) => {
         <div>
             <header>
                 <h1>{selectedList}</h1>
+                <div>
+                    <button className={style.toggleButton} onClick={() => handleSortChange(sortOrder)}>
+                        Sort By {<span>({sortOrder})</span>}
+                    </button>
+                </div>
                 <br />
                 <br />
                 {isLoading ? (

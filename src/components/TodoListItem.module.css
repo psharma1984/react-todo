@@ -52,6 +52,18 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.toggleButton {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggleButton:hover {
+  background-color: #6a0c6a;
+}
 .strikeThrough {
   text-decoration: line-through;
   color: grey;

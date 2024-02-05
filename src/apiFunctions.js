@@ -2,7 +2,7 @@ function generateAPIUrl(baseId, tableName) {
   return `https://api.airtable.com/v0/${baseId}/${tableName}`;
 }
 
-async function fetchTodosFromAPI(selectedList) {
+async function fetchTodosFromAPI(selectedList, sortOrder) {
   const options = {
     method: 'GET',
     headers: { 'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}` }
@@ -24,8 +24,22 @@ async function fetchTodosFromAPI(selectedList) {
       title: todo.fields.title,
       completed: todo.fields.completed,
     }));
-    console.log(todos)
-    return todos;
+
+    const sortedTodos = todos.sort((objectA, objectB) => {
+      const titleA = objectA.title.toLowerCase();
+      const titleB = objectB.title.toLowerCase();
+
+      const comparison = sortOrder === 'asc' ? 1 : -1;
+
+      if (titleA < titleB) {
+        return comparison;
+      } else if (titleA > titleB) {
+        return -comparison;
+      } else {
+        return 0;
+      }
+    })
+    return sortedTodos;
   }
   catch (err) {
     console.log(err.message)
