@@ -6,7 +6,7 @@ import style from './TodoListItem.module.css';
 function TodoListItem({ todo, onRemoveTodo, onUpdateTodo }) {
 
     const { id, completed } = todo;
-    const [isCompleted, setIsCompleted] = useState(completed);
+    const [isCompleted, setIsCompleted] = useState(completed || false);
 
 
     function handleRemove() {
