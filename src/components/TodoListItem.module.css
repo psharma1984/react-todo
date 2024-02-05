@@ -2,6 +2,13 @@
   display: flex;
   margin-bottom: 10px;
 }
+.ListItem span {
+  flex: 1; /* Expand to take available space */
+  max-width: 150px; /* Set your desired fixed width */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for text overflow */
+  white-space: normal; /* Prevent text from wrapping to next line */
+}
 .container {
   display: flex;
   flex-direction: row;
@@ -9,16 +16,21 @@
 }
 .box {
   width: 50%;
-  padding: 60px;
+  padding: 20px;
+  margin-top: 70px;
 }
 
-/* styling to create a box-like appearance for each list item */
 .SideDiv {
+  position: fixed;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: center;
   margin: 20px;
+  height: 400px;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
 }
 .SideDiv div {
   box-sizing: border-box;
@@ -78,19 +90,6 @@ body {
   margin-left: 10px;
 }
 
-.navLink {
-  color: #fff;
-  text-decoration: wavy;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.activeNavLink {
-  background-color: coral;
-  color: blue;
-}
-
 .addButton {
   background-color: #4caf50;
   color: #fff;
@@ -110,6 +109,26 @@ input {
 .deleteIcon {
   color: grey;
   cursor: pointer;
-  margin-right: 340px;
-  flex: 0;
+  margin-left: 40px;
+  flex-shrink: 0;
+}
+/* Media Queries */
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .box {
+    width: 80%;
+  }
+}
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+  .box {
+    width: 100%;
+  }
 }

@@ -39,13 +39,13 @@
   color: #777;
 }
 
-/* Responsive styles (optional) */
+/* Responsive styles  */
 @media (max-width: 600px) {
-  .main h2 {
+  .div h2 {
     font-size: 2rem;
   }
 
-  .ctaButton {
+  .Button {
     font-size: 1rem;
   }
 }
