@@ -5,6 +5,7 @@
 .container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .box {
   width: 50%;
@@ -95,5 +96,6 @@ input {
 .deleteIcon {
   color: grey;
   cursor: pointer;
+  margin-right: 340px;
   flex: 0;
 }
