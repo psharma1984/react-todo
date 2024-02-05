@@ -17,7 +17,7 @@ const TodoContainer = ({ selectedList }) => {
             setIsLoading(false);
         }
         fetchData();
-    });
+    }, [selectedList]);
 
 
     useEffect(() => {
