@@ -5,7 +5,7 @@ import AddTodoForm from './AddTodoForm';
 import { fetchTodosFromAPI, postNewTodoToAPI, deleteTodoFromAPI, updateTodoFromAPI } from '../apiFunctions'
 import style from './TodoListItem.module.css';
 
-const TodoContainer = ({ selectedList }) => {
+const TodoContainer = ({ tableName }) => {
     const [todoList, setTodoList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
@@ -14,13 +14,13 @@ const TodoContainer = ({ selectedList }) => {
 
     useEffect(() => {
         async function fetchData() {
-            const todos = await fetchTodosFromAPI(selectedList, sortOrder);
+            const todos = await fetchTodosFromAPI(tableName, sortOrder);
             setTodoList([...todos]);
             //console.log(todos)
             setIsLoading(false);
         }
         fetchData();
-    }, [selectedList, sortOrder]);
+    }, [tableName, sortOrder]);
 
 
     useEffect(() => {
@@ -34,15 +34,15 @@ const TodoContainer = ({ selectedList }) => {
         setSortOrder(newSortOrder);
     }
     async function postTodo(newTodo) {
-        const addedTodo = await postNewTodoToAPI(newTodo, selectedList);
+        const addedTodo = await postNewTodoToAPI(newTodo, tableName);
         if (addedTodo) {
-            const sortedTodos = await fetchTodosFromAPI(selectedList, sortOrder);
+            const sortedTodos = await fetchTodosFromAPI(tableName, sortOrder);
             setTodoList([...sortedTodos]);
         }
     }
 
     async function removeTodoFromList(id) {
-        const removedTodo = await deleteTodoFromAPI(id, selectedList);
+        const removedTodo = await deleteTodoFromAPI(id, tableName);
         //console.log(removedTodo)
         if (removedTodo) {
             const newTodoList = todoList.filter(todo => todo.id !== id);
@@ -52,8 +52,7 @@ const TodoContainer = ({ selectedList }) => {
 
     async function updateTodoInList(id, newCompleted) {
 
-        const data = await updateTodoFromAPI(id, newCompleted, selectedList);
-        console.log(data)
+        await updateTodoFromAPI(id, newCompleted, tableName);
         const updatedTodoList = todoList.map((todo) =>
             todo.id === id ? { ...todo, completed: newCompleted } : todo
         );
@@ -63,7 +62,7 @@ const TodoContainer = ({ selectedList }) => {
     return (
         <div>
             <header>
-                <h1>{selectedList}</h1>
+                <h1>{tableName}</h1>
                 <div>
                     <button className={style.toggleButton} onClick={() => handleSortChange(sortOrder)}>
                         Sort By {<span>({sortOrder})</span>}
@@ -87,6 +86,7 @@ const TodoContainer = ({ selectedList }) => {
 }
 
 TodoContainer.propTypes = {
+    tableName: PropTypes.string.isRequired,
     onRemoveTodo: PropTypes.func,
 }
 

@@ -6,14 +6,10 @@ import LandingPage from "./components/LandingPage";
 import style from './components/TodoListItem.module.css';
 
 const App = () => {
-  const listNames = ['Work', 'Personal', 'School'];
-  const [selectedList, setSelectedList] = useState('Personal');
-  const onSelectList = (listName) => {
-    // Handle the selected list as needed
-    console.log(`Selected List: ${listName}`);
-
-    // Update the selectedList state
-    setSelectedList(listName);
+  const tableNames = ['Work', 'Personal', 'School'];
+  const [tableName, setTableName] = useState('Personal');
+  const onTableName = (tableName) => {
+    setTableName(tableName);
   };
   return (
     <BrowserRouter>
@@ -22,10 +18,10 @@ const App = () => {
         <Route path="/todolist" element={
           <div className={style.container}>
             <div className={style.box}>
-              <SideDiv listNames={listNames} onSelectList={onSelectList} />
+              <SideDiv tableNames={tableNames} onTableName={onTableName} />
             </div>
             <div className={style.box}>
-              <TodoContainer selectedList={selectedList} />
+              <TodoContainer tableName={tableName} />
             </div>
           </div>
         } />

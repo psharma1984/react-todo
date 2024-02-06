@@ -2,23 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './TodoListItem.module.css';
 
-function InputWithLabel(props) {
+function InputWithLabel({ type, id, name, value, onChange, children }) {
     const inputRef = React.useRef()
     React.useEffect(() => {
         if (inputRef.current) {
             inputRef.current.focus()
         }
-    });
+    }, []);
 
     return (
         <>
-            <input ref={inputRef} id='todoTitle' value={props.value} type='text' name='title' onChange={props.onChange} />
+            <label htmlFor="todoTitle">{children}</label>
+            <input ref={inputRef} id={id} name={name} value={value} type={type} onChange={onChange} />
         </>
     );
 }
 
 InputWithLabel.propTypes = {
-    onChange: PropTypes.func,
+    type: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    children: PropTypes.node,
 }
 
 export default InputWithLabel

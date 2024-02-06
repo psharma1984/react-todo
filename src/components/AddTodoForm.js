@@ -9,7 +9,6 @@ function AddTodoForm({ onAddTodo }) {
 
     const handleTitleChange = (event) => {
         const newTodoTitle = event.target.value;
-        console.log(newTodoTitle)
         setTodoTitle(newTodoTitle)
     }
     const handleAddTodo = (event) => {
@@ -24,7 +23,7 @@ function AddTodoForm({ onAddTodo }) {
     };
     return (
         <form onSubmit={handleAddTodo} style={{ display: "flex", margin: 0, padding: 0 }}>
-            <InputWithLabel value={todoTitle} onChange={handleTitleChange}>
+            <InputWithLabel type="text" id="todoTitle" name="title" value={todoTitle} onChange={handleTitleChange}>Title
             </InputWithLabel>
             <button className={style.addButton} type='submit'>
                 <MdAdd />
@@ -34,7 +33,7 @@ function AddTodoForm({ onAddTodo }) {
 }
 
 AddTodoForm.propTypes = {
-    onAddTodo: PropTypes.func,
+    onAddTodo: PropTypes.func.isRequired,
 }
 
 export default AddTodoForm;

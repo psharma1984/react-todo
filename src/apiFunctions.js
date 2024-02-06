@@ -12,7 +12,6 @@ async function fetchTodosFromAPI(selectedList, sortOrder) {
   //console.log(url)
   try {
     const response = await fetch(url, options);
-    console.log(response)
     if (!response.ok) {
       const message = `Error: ${response.status}`;
       throw new Error(message);
