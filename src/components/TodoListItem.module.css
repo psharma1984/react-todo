@@ -1,0 +1,103 @@
+.ListItem {
+  display: flex;
+  margin-bottom: 10px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.box {
+  width: 50%;
+  padding: 60px;
+}
+
+/* styling to create a box-like appearance for each list item */
+.SideDiv {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 20px;
+}
+.SideDiv div {
+  box-sizing: border-box;
+  height: 100px;
+  width: 200px;
+  margin: 10px; /* margin between the boxes */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: darkgray;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SideDiv div:hover {
+  background-color: gray;
+}
+
+h1 {
+  font-size: large;
+  padding-top: 20px;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+body {
+  color: white;
+  background-color: black;
+  font-family: "Roboto", sans-serif;
+}
+
+.strikeThrough {
+  text-decoration: line-through;
+  color: grey;
+  flex: 2;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.noStrike {
+  flex: 2;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.navLink {
+  color: #fff;
+  text-decoration: wavy;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.activeNavLink {
+  background-color: coral;
+  color: blue;
+}
+
+.addButton {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.addButton:hover {
+  background-color: darkgreen;
+}
+
+input {
+  margin: 0;
+}
+
+.deleteIcon {
+  color: grey;
+  cursor: pointer;
+  margin-right: 340px;
+  flex: 0;
+}

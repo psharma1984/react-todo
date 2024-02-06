@@ -1,69 +1,31 @@
 import React, { useState } from 'react';
-import TodoList from './TodoList';
-import AddTodoForm from './AddTodoForm';
-import { fetchTodosFromAPI, postNewTodoToAPI } from './apiFunctions'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './TodoListItem.module.css';
+import AppRoutes from './AppRoutes';
+import SideDiv from './components/SideDiv';
+import style from './components/TodoListItem.module.css';
+
+
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const listNames = ['Work', 'Personal', 'School'];
+  const [selectedList, setSelectedList] = useState('Personal');
+  const onSelectList = (listName) => {
+    // Handle the selected list as needed
+    console.log(`Selected List: ${listName}`);
 
-  useEffect(() => {
-    async function fetchData() {
-      const todos = await fetchTodosFromAPI();
-      console.log(todos)
-      setTodoList([...todos]);
-      setIsLoading(false);
-    }
-    fetchData();
-  }, []);
+    // Update the selectedList state
+    setSelectedList(listName);
+  };
 
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem('savedTodoList', JSON.stringify(todoList));
-    }
-  }, [todoList, isLoading]);
-
-  async function postTodo(newTodo) {
-    const addedTodo = await postNewTodoToAPI(newTodo);
-    if (addedTodo) {
-      setTodoList([...todoList, addedTodo])
-    }
-  }
-
-  function removeTodoFromList(id) {
-    const updatedTodoList = todoList.filter(todo => todo.id !== id)
-    setTodoList(updatedTodoList);
-  }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={
-          <header>
-            <h1>ToDoList</h1>
-            <br />
-            {isLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                <TodoList todoList={todoList} onRemoveTodo={removeTodoFromList} />
-                <br />
-              </>
-
-            )}
-            <AddTodoForm onAddTodo={postTodo} />
-
-          </header>
-        } />
-        <Route path="/new" element={
-          <div style={{ textAlign: 'center' }}>
-            <h1>New Todo List</h1>
-          </div>
-        } />
-      </Routes>
-    </BrowserRouter>
+    <div className={style.container}>
+      <div className={style.box}>
+        <SideDiv listNames={listNames} onSelectList={onSelectList} />
+      </div>
+      <div className={style.box} >
+        <AppRoutes selectedList={selectedList} />
+      </div>
+    </div>
   );
 }
 
