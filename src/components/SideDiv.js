@@ -1,5 +1,6 @@
 // SideDiv.js
 import React from 'react';
+import PropTypes from 'prop-types';
 import { CiHeart, CiBoxList, CiBank } from 'react-icons/ci';
 import style from './TodoListItem.module.css'
 
@@ -10,19 +11,24 @@ const iconMap = {
   // Add more mappings as needed
 };
 
-const SideDiv = ({ listNames, onSelectList }) => {
+const SideDiv = ({ tableNames, onTableName }) => {
   return (
     <div className={style.SideDiv}>
-      {listNames.map((list) => (
-        <div key={list} onClick={() => onSelectList(list)}>
-          {iconMap[list]}
+      {tableNames.map((table) => (
+        <div key={table} onClick={() => onTableName(table)}>
+          {iconMap[table]}
           <br />
-          {list}
+          {table}
 
         </div>
       ))}
     </div>
   );
+};
+
+SideDiv.propTypes = {
+  tableNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onTableName: PropTypes.func.isRequired,
 };
 
 export default SideDiv;
